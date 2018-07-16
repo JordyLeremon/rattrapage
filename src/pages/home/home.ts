@@ -13,6 +13,8 @@ export class HomePage {
  
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  lat: any;
+  Lng: any;
  
   constructor(public navCtrl: NavController, 
     public toastCtrl: ToastController, 
@@ -23,6 +25,19 @@ export class HomePage {
  
   ionViewDidLoad(){
     this.loadMap();
+
+  }
+  addData(){
+    this.geolocation.getCurrentPosition().then((position) => {
+ 
+      this.lat = position.coords.latitude;
+      this.Lng=position.coords.longitude
+
+    }, (err) => {
+      console.log(err);
+    });
+    this.afd.list('Ma Position/').push(this.lat),
+    this.afd.list('Ma Position/').push(this.Lng)
   }
  
   
